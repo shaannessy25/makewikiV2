@@ -25,7 +25,7 @@ SECRET_KEY = '1yct-t!2bnkgc7j59z+9cdd2k)@y+ftqor$!aya()3if^cnlo-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'sh-makewikiv2.herokuapp.com']
 
 
 # Application definition
@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'wiki'
+    'rest_framework',
+    'wiki',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+
 # wiki app settings
 WIKI_PAGE_TITLE_MAX_LENGTH = 600
 
@@ -145,4 +151,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 try:
     from makewiki.local_settings import *
 except ImportError:
-    pass
+    pass        
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

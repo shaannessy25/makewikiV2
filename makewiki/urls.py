@@ -1,5 +1,4 @@
 """makewiki URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
 Examples:
@@ -15,6 +14,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 """
 CHALLENGES:
@@ -26,10 +27,15 @@ urlpatterns = [
     # Admin Site
     path('admin/', admin.site.urls),
 
-    # Wiki App
+    # to link urls in Wiki App
     path('', include('wiki.urls')),
 
-    #Enabling User Authentication
+    #Enabling User Authentication in Django 
     path('accounts/', include('django.contrib.auth.urls')),
 
-]
+    #to link urls in Account App
+    path('accounts/', include('accounts.urls')),
+
+     path('api/', include('api.urls'))
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
